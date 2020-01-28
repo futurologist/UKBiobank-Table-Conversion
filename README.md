@@ -15,6 +15,7 @@ For example, after preliminary direct extraction (we call it phase 1) of a sub-t
 Say we are interested in self-reported conditions and the ages of onset recorded during the three separate visits to the Data Center. The sub-table of the original UKB data-table, will look something like this:
 
 | ID  | NumCondit x 3 | (Condition0 | Condition1 | ...| Condit28) x3	|  AgeOfCond0 x3 |	... | AgeOfCond28 x3 |
+
 | 1   | 3 fields      |     29 X 3 fields                             |  29 x 3 fields                         |
 
 |f.eid| f.135.visit.0 |    f.20002.visit.count                        |  f.20009.visit.count                   | 
@@ -27,10 +28,13 @@ Asthma  Hayfev/Rhinitis  Eczema
 and use them to creat a table of the format:
 
 ID    |  Asthma | Hayfev/Rhinitis |  Eczema  |  age_Asthma_v0  |  age_Asthma_v1 | age_Asthma_v2 | age_Hayf_Rhin_v0 | age_Hayf_Rhin_v1 | 
+
 ID_num| 0 or 1  |   0 or 1        |  0 or 1  |  age            |      age       |     age       |     age          |     age          | 
 
 
+
 age_Hayf_Rhin_v2 | age_Ecz_v0 | age_Ecz_v1 | age_Ecz_v2 |
-     age         | age        | age        | age        |
+
+   age           | age        | age        | age        |
      
 The R code privede performs this conversion. It also has the potential to add extra,  auxiliary variables which do not need to be converted but included in their original format to the data table.        
