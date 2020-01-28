@@ -51,7 +51,6 @@ create_bin_table <- function(t_main, conds, cond_lbls, other, other_lbl){
   t_out[is.na(t_out)] <- 0
   t_out
 }
-
 ####################################################################################################
 
 #for a given codnition, for all three visits, create three columns with
@@ -87,9 +86,6 @@ create_age_conds_table <- function(t_main, t_bin, conds, cond_lbls, n_v){
   }
   t_out
 }
-
-
-
 #####################################################################################################
 #####################################################################################################
 #####################################################################################################
@@ -111,5 +107,23 @@ t20002 <- compliant_table(t20002_full)
 t_asth_rhin_ecz <- create_bin_table(t20002, list_of_conditions, list_of_labels, c(), "")
 t_asth_rhin_ecz <- create_age_conds_table(t20002, t_asth_rhin_ecz, list_of_conditions, list_of_labels, n_visits)
 t_asth_rhin_ecz <- left_join(select(t20002_full, 'f.eid'), t_asth_rhin_ecz, by = "f.eid")
-
 ##############################################################################
+
+
+############################## ADD AUXILIARY TABLE ###########################
+filename <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Test_data\\ukbAux.txt" 
+t_Aux <- fread(filename)  #502599
+t_asth_rhin_ecz_aux <- left_join(t_asth_rhin_ecz, t_Aux, by='f.eid')
+##############################################################################
+
+
+######################## CHANGE ID LABEL FROM 'f.eid' TO 'ID' ###########################
+names(t_asth_rhin_ecz)[1] <- 'ID' #Do this only after being done with averything else
+names(t_asth_rhin_ecz_aux)[1] <- 'ID' #Do this only after being done with averything else
+##############################################################################
+
+########################        EXPORT AS TEXT FILES         ###########################
+write.table(t_asth_rhin_ecz, "C:\\MY_FOLDERS\\Asthma_and_Pain\\Test_data\\asth_rhin_ecz.txt", append = FALSE, sep = "\t", quote = FALSE, col.names=TRUE, row.names=FALSE)
+write.table(t_asth_rhin_ecz_aux, "C:\\MY_FOLDERS\\Asthma_and_Pain\\Test_data\\asth_rhin_ecz_aux.txt", append = FALSE, sep = "\t", quote = FALSE, col.names=TRUE, row.names=FALSE)
+##############################################################################
+
