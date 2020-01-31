@@ -69,10 +69,7 @@ add_1_age_diag_to_table <- function(t_main, t_bin, cond, cond_lbl, n_v, l_arry, 
   }
   t_out
 }
-
-#given a list of conditions, conds, create a table with columns orginized as follows:
-# 1. one column per condition, with binary entry, 
-# 2 column orginized in triple visits per condition, that contain the age of onset, declared during each visit     
+ 
 add_age_diag_to_table <- function(t_main, t_bin, conds, cond_lbls, n_v, l_arry, start_pos){
   t_out <- t_bin
   n <- length(conds)
@@ -83,8 +80,11 @@ add_age_diag_to_table <- function(t_main, t_bin, conds, cond_lbls, n_v, l_arry, 
 }
 
 ####################################################################################################
-
-build_cond_and_age_diag_table <- function(t_main,list_of_conditions, list_of_labels, n_visits, l_array, start_pos){
+#given a list of conditions, list_of_conditions (and lables), build from the original UKB table t_main 
+#create a table with columns orginized as follows:
+# 1. one column per condition per visit, with entries 0, 1 or NA, 
+# 2. one column per condition per visit, that contain the age of diagnosis of the condition, declared by the participant    
+build_cond_and_age_diag_table <- function(t_main, list_of_conditions, list_of_labels, n_visits, l_array, start_pos){
   t_cond_age_diag <- build_bin_table(t_main, list_of_conditions, list_of_labels, n_visits, l_array, start_pos)
   t_cond_age_diag <- add_age_diag_to_table(t_main, t_cond_age_diag, list_of_conditions, list_of_labels, n_visits, l_array, start_pos)
 }
