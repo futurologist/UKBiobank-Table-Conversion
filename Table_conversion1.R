@@ -94,17 +94,28 @@ build_cond_and_age_diag_table <- function(t_main, list_of_conditions, list_of_la
 
 relabel <- function(table, fields, array_length, instances, labels){
   headers <- names(table)
-  n_headers <- length(headers)
+  #n_headers <- length(headers)
   n_fields <- length(fields)
   h <- 2
   for(i in 1:n_fields){
     for(v in 1:instances[i]){
-      for(l in 1:arrays_length[i]){
+      if(arrays_length[i] != 1){
+        for(l in 1:arrays_length[i]){
+          if(instances[i] == 1){
+            headers[h] <- paste(labels[i], "_", as.character(l), sep = "")
+          }
+          else{
+            headers[h] <- paste(labels[i], "_", as.character(l),"_v", as.character(v-1), sep = "")
+          }
+          h <- h+1
+        }
+      } 
+      else{
         if(instances[i] == 1){
-          headers[h] <- paste(labels[i], "_", l, sep = "")
+          headers[h] <- labels[i]
         }
         else{
-          headers[h] <- paste(labels[i], "_", l,"_v", v, sep = "")
+          headers[h] <- paste(labels[i], "_v", as.character(v-1), sep = "")
         }
         h <- h+1
       }
@@ -114,6 +125,7 @@ relabel <- function(table, fields, array_length, instances, labels){
 }
 
 ####################################################################################################
+
 
 
 ############################## INPUTS FOR CONDITIONS ###############################################
