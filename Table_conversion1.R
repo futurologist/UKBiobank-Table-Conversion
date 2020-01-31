@@ -127,10 +127,10 @@ n_visits <- 3
 
 #################  INPUTS FOR ADDITIONAL DATA, E.G. DEMOGRAPHIC INFO  ##############################
 filename <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Test_data\\ukb_demogr_geno_info.txt" 
-fields <- c(31, 21000, 22001, 21003, 22006, 22009, 22010, 22018)    
+fields <- c(31, 21000, 21003, 22001, 22006, 22009, 22010, 22018)    
 arrays_length <- c(1, 1, 1, 1, 1, 40, 1, 1)
-instances <- c(1, 3, 1, 3, 1, 1, 1, 1)
-labels <- c("Sex", "Ethnic_backgr", "Genetic_sex", "Age_at_Visit", 
+instances   <-   c(1, 3, 3, 1, 1,  1, 1, 1)
+labels <- c("Sex", "Ethnic_backgr",  "Age_at_Visit", "Genetic_sex",
             "Gen_ethnic_grp", "PC", "Geno_analys_exclns",
             "Rel_exclns")
 ####################################################################################################
