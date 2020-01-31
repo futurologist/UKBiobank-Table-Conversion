@@ -1,7 +1,8 @@
 library(dplyr)
 library(data.table)
 
-##############################################################################################33
+####################################################################################################
+
 #creates a table of four columns: id and one column of condition (= cond) per visit, 
 #i.e. it is a table of 502599 rows and 4 columns
 #the first column is the id column, 
@@ -69,7 +70,10 @@ add_1_age_diag_to_table <- function(t_main, t_bin, cond, cond_lbl, n_v, l_arry, 
   }
   t_out
 }
- 
+
+#given a list of conditions, conds, create a table with columns orginized as follows:
+# 1. one column per condition, with binary entry, 
+# 2 column orginized in triple visits per condition, that contain the age of onset, declared during each visit     
 add_age_diag_to_table <- function(t_main, t_bin, conds, cond_lbls, n_v, l_arry, start_pos){
   t_out <- t_bin
   n <- length(conds)
@@ -80,43 +84,71 @@ add_age_diag_to_table <- function(t_main, t_bin, conds, cond_lbls, n_v, l_arry, 
 }
 
 ####################################################################################################
-#given a list of conditions, list_of_conditions (and lables), build from the original UKB table t_main 
-#create a table with columns orginized as follows:
-# 1. one column per condition per visit, with entries 0, 1 or NA, 
-# 2. one column per condition per visit, that contain the age of diagnosis of the condition, declared by the participant    
+
 build_cond_and_age_diag_table <- function(t_main, list_of_conditions, list_of_labels, n_visits, l_array, start_pos){
   t_cond_age_diag <- build_bin_table(t_main, list_of_conditions, list_of_labels, n_visits, l_array, start_pos)
   t_cond_age_diag <- add_age_diag_to_table(t_main, t_cond_age_diag, list_of_conditions, list_of_labels, n_visits, l_array, start_pos)
 }
 
-############################## INPUTS ########################################
+####################################################################################################
+
+relabel <- function(table, fields, array_length, instances, labels){
+  headers <- names(table)
+  n_headers <- length(headers)
+  n_fields <- length(fields)
+  h <- 2
+  for(i in 1:n_fields){
+    for(v in 1:instances[i]){
+      for(l in 1:arrays_length[i]){
+        if(instances[i] == 1){
+          headers[h] <- paste(labels[i], "_", l, sep = "")
+        }
+        else{
+          headers[h] <- paste(labels[i], "_", l,"_v", v, sep = "")
+        }
+        h <- h+1
+      }
+    }
+  }
+  headers
+}
+
+####################################################################################################
+
+
+############################## INPUTS FOR CONDITIONS ###############################################
 filename <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Test_data\\ukb20002.txt"
 l_array <- 29  # there are 29 fields for conditions per visit
 start_pos <- 5 # the columns with codes for conditions start with column 5 and end with columns 3*29-1 = 91  
 list_of_conditions <- c(1111, 1387, 1452)
 list_of_labels <- c('Asthma', 'Hayf_Rhin', 'Eczema')
 n_visits <- 3
-##############################################################################
+####################################################################################################
 
-############################## EXECUTE #######################################
+#################  INPUTS FOR ADDITIONAL DATA, E.G. DEMOGRAPHIC INFO  ##############################
+filename <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Test_data\\ukb_demogr_geno_info.txt" 
+fields <- c(31, 21000, 22001, 21003, 22006, 22009, 22010, 22018)    
+arrays_length <- c(1, 1, 1, 1, 1, 40, 1, 1)
+instances <- c(1, 3, 1, 3, 1, 1, 1, 1)
+labels <- c("Sex", "Ethnic_backgr", "Genetic_sex", "Age_at_Visit", 
+            "Gen_ethnic_grp", "PC", "Geno_analys_exclns",
+            "Rel_exclns")
+####################################################################################################
+
+############################## EXECUTE #############################################################
 t20002_full <- fread(filename)  #502599
 t_asth_rhin_ecz <- build_cond_and_age_diag_table(t20002_full,list_of_conditions, list_of_labels, n_visits, l_array, start_pos)
-#write.table(t_asth_rhin_ecz, "C:\\MY_FOLDERS\\Asthma_and_Pain\\Test_data\\asth_rhin_ecz.txt", append = FALSE, sep = "\t", quote = FALSE, col.names=TRUE, row.names=FALSE)
-##############################################################################
+####################################################################################################
 
-############################## ADD SOME DEMOGRAPHIC AND GENETIC INFO ###########################
-filename <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Test_data\\ukbAux.txt" 
-t_Aux <- fread(filename)  #502599
-t_asth_rhin_ecz_aux <- left_join(t_asth_rhin_ecz, t_Aux, by='f.eid')
-##############################################################################
+############################## EXECUTE #############################################################
+t_demogr_geno_info <- fread(filename) #502599
+names(t_demogr_geno_info) <- relabel(t_demogr_geno_info, fields, array_length, instances, labels)
 
-######################## CHANGE ID LABEL FROM 'f.eid' TO 'ID' ###########################
-names(t_asth_rhin_ecz)[1] <- 'ID' #Do this only after being done with averything else
-names(t_asth_rhin_ecz_aux)[1] <- 'ID' #Do this only after being done with averything else
-##############################################################################
+t_asth_rhin_ecz_plus <- left_join(t_asth_rhin_ecz, t_demogr_geno_info, by='f.eid')
 
-########################   EXPORT AS TEXT FILES  ###########################
+names(t_asth_rhin_ecz)[1] <- 'ID'
+names(t_asth_rhin_ecz_plus)[1] <- 'ID'
+
 write.table(t_asth_rhin_ecz, "C:\\MY_FOLDERS\\Asthma_and_Pain\\Test_data\\asth_rhin_ecz.txt", append = FALSE, sep = "\t", quote = FALSE, col.names=TRUE, row.names=FALSE)
-write.table(t_asth_rhin_ecz_aux, "C:\\MY_FOLDERS\\Asthma_and_Pain\\Test_data\\asth_rhin_ecz_aux.txt", append = FALSE, sep = "\t", quote = FALSE, col.names=TRUE, row.names=FALSE)
-##############################################################################
-
+write.table(t_asth_rhin_ecz_plus, "C:\\MY_FOLDERS\\Asthma_and_Pain\\Test_data\\asth_rhin_ecz_plus.txt", append = FALSE, sep = "\t", quote = FALSE, col.names=TRUE, row.names=FALSE)
+####################################################################################################
