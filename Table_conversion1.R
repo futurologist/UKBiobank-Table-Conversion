@@ -127,7 +127,6 @@ relabel <- function(table, fields, array_length, instances, labels){
 ####################################################################################################
 
 
-
 ############################## INPUTS FOR CONDITIONS ###############################################
 filename <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Test_data\\ukb20002.txt"
 l_array <- 29  # there are 29 fields for conditions per visit
