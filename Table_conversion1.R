@@ -3,7 +3,8 @@ library(data.table)
 
 ####################################################################################################
 
-#creates a table of four columns: id and one column of condition (= cond) per visit, 
+#creates a table of four columns: id and one column of condition (= cond) per visit,
+# | f.eid | Condition_v0 | Condition_v1 | Condition_v2 |
 #i.e. it is a table of 502599 rows and 4 columns
 #the first column is the id column, 
 # the entries in the three columns are either: 
@@ -14,7 +15,6 @@ build_id_cond_v_columns <- function(t_main, t_ids, cond, cond_lbl, n_v, l_arry, 
   cond_found_in_row <- function(r){
     any(r == cond)
   }
-  #t_out <- select(t_main, 'f.eid')
   t_out <- t_ids
   for(i in 1:n_v){
     a <- start_pos + (i-1)*l_arry
@@ -28,11 +28,13 @@ build_id_cond_v_columns <- function(t_main, t_ids, cond, cond_lbl, n_v, l_arry, 
     t <- left_join(t_nonNA_ids, t, by='f.eid') 
     t[is.na(t)] <- 0 
     t_out <- left_join(t_out, t, by='f.eid')
-    #names(t_out)[2] <- headers[,as.character(cond)][[1]]
   }
   t_out
 }
 
+# Builds a "binary" type table: given a list of conditions and a list of labels for these conditions
+# for each condition from the list creates a 4 column table, using the preceding function 'build_id_cond_v_columns'
+# and then pastes them togehter aligning them together by their first columns 'f.eid' 
 build_bin_table <- function(t_main, conds, cond_lbls, n_v, l_arry, start_pos){
   t_ids <- select(t_main, 'f.eid')
   t_out <- t_ids
@@ -41,11 +43,6 @@ build_bin_table <- function(t_main, conds, cond_lbls, n_v, l_arry, start_pos){
     t <- build_id_cond_v_columns(t_main, t_ids, conds[j], cond_lbls[j], n_v, l_arry, start_pos)
     t_out <- left_join(t_out, t, by='f.eid')
   }
-  #if(length(other) != 0){
-  #  t_curr <- columns_id_other(t_main, other, other_lbl)
-  #  t_out <- full_join(t_out, t_curr, by='f.eid')
-  #}
-  #t_out[is.na(t_out)] <- 0
   t_out
 }
 
