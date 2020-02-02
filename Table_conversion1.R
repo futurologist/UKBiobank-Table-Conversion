@@ -47,7 +47,11 @@ build_bin_table <- function(t_main, conds, cond_lbls, n_v, l_arry, start_pos){
 }
 
 ####################################################################################################
-
+# for one chosen condition during each visist, this function finds the corresponding age of diagnosis of the condition, 
+# declared during the respective visit. As a result, for a given condition for each visit, we gat a tables
+# | f.eid | Age_cond_v0 | Age_cond_v1 | Age_cond_v2 |
+# and we attach it to the alrady existing full table t_out by aligning the first columns 'f.eid' of t_out and 
+# the new four-column table  
 add_1_age_diag_to_table <- function(t_main, t_bin, cond, cond_lbl, n_v, l_arry, start_pos){
   find_indx_in_row <- function(r){
     j <- (match(cond, r[a:b]) + a-1 + 3*l_arry)
@@ -69,8 +73,8 @@ add_1_age_diag_to_table <- function(t_main, t_bin, cond, cond_lbl, n_v, l_arry, 
 }
 
 #given a list of conditions, conds, create a table with columns orginized as follows:
-# 1. one column per condition, with binary entry, 
-# 2 column orginized in triple visits per condition, that contain the age of onset, declared during each visit     
+# 1. one column per condition per visit, each with entry either 0, 1 or NA; 
+# 2. columns per condition per visits, that contain the age of onset, declared during each visit     
 add_age_diag_to_table <- function(t_main, t_bin, conds, cond_lbls, n_v, l_arry, start_pos){
   t_out <- t_bin
   n <- length(conds)
