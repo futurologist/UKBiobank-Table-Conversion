@@ -137,6 +137,11 @@ list_of_labels <- c('Asthma', 'Hayf_Rhin', 'Eczema')
 n_visits <- 3
 ####################################################################################################
 
+############################## EXECUTE #############################################################
+t20002_full <- fread(filename)  #502599
+t_asth_rhin_ecz <- build_cond_and_age_diag_table(t20002_full,list_of_conditions, list_of_labels, n_visits, l_array, start_pos)
+####################################################################################################
+
 #################  INPUTS FOR ADDITIONAL DATA, E.G. DEMOGRAPHIC INFO  ##############################
 filename <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Test_data\\ukb_demogr_geno_info.txt" 
 fields <- c(31, 21000, 21003, 22001, 22006, 22009, 22010, 22018)    
@@ -145,11 +150,6 @@ instances   <-   c(1, 3, 3, 1, 1,  1, 1, 1)
 labels <- c("Sex", "Ethnic_backgr",  "Age_at_Visit", "Genetic_sex",
             "Gen_ethnic_grp", "PC", "Geno_analys_exclns",
             "Rel_exclns")
-####################################################################################################
-
-############################## EXECUTE #############################################################
-t20002_full <- fread(filename)  #502599
-t_asth_rhin_ecz <- build_cond_and_age_diag_table(t20002_full,list_of_conditions, list_of_labels, n_visits, l_array, start_pos)
 ####################################################################################################
 
 ############################## EXECUTE #############################################################
