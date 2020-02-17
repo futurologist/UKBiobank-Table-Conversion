@@ -154,6 +154,7 @@ labels <- c("Sex", "Ethnic_backgr",  "Age_at_Visit", "Genetic_sex",
 
 ############################## EXECUTE #############################################################
 t_demogr_geno_info <- fread(filename) #502599
+t_demogr_geno_info <- extract_subtable(t_demogr_geno_info, fields)
 names(t_demogr_geno_info) <- relabel(t_demogr_geno_info, fields, array_length, instances, labels)
 
 t_asth_rhin_ecz_plus <- left_join(t_asth_rhin_ecz, t_demogr_geno_info, by='f.eid')
