@@ -10,11 +10,8 @@ add_col <- function(t, entry, lbl){
 }
 
 create_cond_agegrp_bin <- function(t_main, cond, age_cond, age_lbls, keepNA){
-  #t_main <- t_cond
-  #t_noNA <- filter(t_main, !is.na(t_main[,cond])) 
   t_cases <- filter(t_main, !is.na(t_main[,cond])) 
   t_noNA_id <- select(t_cases, ID)
-  #t_out <- select(t_noNA, ID, cond)
   t_cases <- select(t_cases, ID, cond, age_cond)
   t_cases <- filter(t_cases, t_cases[,cond] == 1)
   t_cases_age <- select(t_cases, age_cond)
