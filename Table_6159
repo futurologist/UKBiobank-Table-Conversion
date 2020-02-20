@@ -49,6 +49,7 @@ t_pain_duration <- build_duration(t6159, fields, instances, labels, n_visits, l_
 
 t_pain_duration <- left_join(t_pain, t_pain_duration, by='f.eid')
 
+names(t_pain)[1] <- 'ID'
 names(t_pain_duration)[1] <- 'ID'
 
 #write.table(t_pain, "C:\\MY_FOLDERS\\Asthma_and_Pain\\Output_data_ph2\\ukb6159_Pain_01.txt", append = FALSE, sep = "\t", quote = FALSE, col.names=TRUE, row.names=FALSE)
