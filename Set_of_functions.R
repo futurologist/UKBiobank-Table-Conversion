@@ -2,7 +2,7 @@ library(dplyr)
 library(data.table)
 
 #################################################################################################################
-#################################################################################################################
+###############################################################################################################
 
 extract_subtable <- function(tbl, list_of_columns){
   headers <- names(tbl)
@@ -12,7 +12,7 @@ extract_subtable <- function(tbl, list_of_columns){
   }
   subt <- select(tbl, pos)
   #subt <- table[, ..pos]
-  subt <- subt[order(subt[, 1]), ]
+  #subt <- subt[order(subt[, 1]), ]
   return(subt)
 }
 
@@ -314,18 +314,22 @@ create_cond_agegrp <- function(t_main, cond, age_cond, age_groups, age_lbls, kee
   return(t_cases)
 }
 
-build_cond_agegrp_bin <- function(t_cond, condition, age_groups, age_group_lbls, n_visits){
+build_cond_agegrp_bin <- function(t_cond, condition, age_groups, age_group_lbls, n_visits, keep_NA){
   t_out <- select(t_cond, 1)
   for(i in 1:n_visits){ 
     visit <- i - 1
     cond <- paste(condition, "_v", visit, sep='') 
     age_lbls <- paste(condition, '_', age_group_lbls, '_v', visit, sep='')
     age_cond <- paste('age_', condition, "_v", visit, sep='') 
-    t  <- create_cond_agegrp(t_cond, cond, age_cond, age_groups, age_lbls, keepNA = TRUE)
+    t  <- create_cond_agegrp(t_cond, cond, age_cond, age_groups, age_lbls, keep_NA)
     t_out  <- left_join(t_out, t, by = 'ID')
   }
   return(t_out)
 }
+
+#col <- grep(condition, names(t_cond),ignore.case = TRUE)
+#t_cond <- select(t_cond, 1, col)
+
 
 #################################################################################################################
 #################################################################################################################
