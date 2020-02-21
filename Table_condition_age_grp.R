@@ -1,6 +1,6 @@
 source("C:\\MY_FOLDERS\\Asthma_and_Pain\\R_code\\Table_creation\\Set_of_functions.R")
 
-# THIS sCRIPT USES THE REUSLTS FROM THE SCRIPT 'Table_20002.R'.
+# THIS sCRIPT USES THE REUSLTS FROM THE SCRIPT 'Table_20002.R', SO YOU MAY HAVE TO RUN 'Table_20002.R' FIRST.
 # FOR THIS SCRIPT TO WORK PROPERLY, YOU HAVE TO MAKE SURE THE LABELS PROVIDED HERE MATCH THE LABELS OF THE 
 # TABLE(S) EXTRACTED WITH THE SCRIPT 'Table_20002.R'.
 
@@ -23,11 +23,13 @@ age_groups <- list(c(0,18), c(18,40), c(40, 120))
 
 age_group_lbls <- c('Age_6', 'Age_4', 'Age_5' )
 
-filepath_out <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Test_data\\condition_age_groups.txt"
+filepath_out <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Output_data_ph2\\asthma_age_groups.txt"
 
 ############################## EXECUTE #############################################################
-t_cond_agegrp_bin <- build_cond_agegrp_bin(t_cond, condition, age_groups, age_group_lbls, n_visits)
+
+t_cond_agegrp_bin <- build_cond_agegrp_bin(t_cond, condition, age_groups, age_group_lbls, n_visits, keep_NA = TRUE)
 
 write.table(t_cond_agegrp_bin,
             filepath_out, 
             append = FALSE, sep = "\t", quote = FALSE, col.names=TRUE, row.names=FALSE)
+
