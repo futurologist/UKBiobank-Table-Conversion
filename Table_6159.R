@@ -7,7 +7,6 @@ filepath6159_in <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Output_data_ph1\\ukb6159.tx
 # you can change the lables that follow, but preservet their order: 
 list_of_labels <- c('Prf_no_Ansr', 'Non_Abve', 'All_over', 
                     'Neck_Shldr_pn', 'Hip_pn', 'Back_pn', 'Stom_Abdmn_pn', 'Knee_pn', 'Headch', 'Face_pn')
-n_visits <- 3 # The number of visits can change to 4 when the fourth visit becomes available and is inculded in the UKB table
 
 ##########################################################################################################
 
@@ -17,11 +16,12 @@ labels <- c('All_over_3+m', 'Neck_Shldr_pn_3+m',
             'Hip_pn_3+m', 'Back_pn_3+m', 'Stom_Abdmn_pn_3+m', 
             'Knee_pn_3+m', 'Headch_3+m', 'Face_pn_3+m')
 
-filepath6159_out <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Output_data_ph2\\ukb6159_Pain_Duration_01.txt"
+filepath6159_out <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Output_data_ph2\\UKB_Pain_Duration.txt"
 ##########################################################################################################
 
 
 ############################## NOT TO BE CHANGED ##########################################################
+n_visits <- 3 # The number of visits can change to 4 when the fourth visit becomes available and is inculded in the UKB table
 list_of_sites <- c(-3, -7, 8, 3, 6, 4, 5, 7, 1, 2) # Do not change. 
 l_array <- 7  # there are 7 fields for pain siates per visit
 start_pos <- 2 # the columns with codes for pain sites start with column 2 and end with column 2+3*7-1 = 22 
