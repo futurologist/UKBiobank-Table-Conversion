@@ -3,11 +3,11 @@ source("C:\\MY_FOLDERS\\Asthma_and_Pain\\R_code\\Table_creation\\Set_of_function
 ##############################  INPUT FOR CONDITIONS ###############################################
 filepath20002_in <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Output_data_ph1\\ukb20002.txt"
 
-list_of_conditions <- c(1111, 1387)#, 1452)
+list_of_conditions <- c(1111, 1387, 1452)
 
-list_of_labels <- c('Asthma', 'Hayf_Rhin')#, 'Eczema')
+list_of_labels <- c('Asthma', 'Hayf_Rhin', 'Eczema')
 
-filepath20002_out <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Test_data\\asth_rhin_ecz.txt" 
+filepath20002_out <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Output_data_ph2\\asth_rhin_ecz.txt" 
 ####################################################################################################
 
 
@@ -32,7 +32,8 @@ t20002_bin_reord <- group_by_visit(t20002_bin, list_of_conditions, n_visits)
 
 t20002_cond_age <- group_cond_age(t20002_bin, list_of_conditions, n_visits)
 
-write.table(t20002_bin_reord,
+write.table(t20002_bin,
             filepath20002_out, 
             append = FALSE, sep = "\t", quote = FALSE, col.names=TRUE, row.names=FALSE)
 ####################################################################################################
+
