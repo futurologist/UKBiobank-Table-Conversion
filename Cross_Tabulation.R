@@ -25,7 +25,7 @@ create_frequency_table <- function(pain, conditions){
 
 ################################# PROVIDE OUPUT LOCATION ##########################################
 
-filepath_out <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Output_data_ph2\\cross_table_pain_vs_cond.txt"
+filepath_out <- "write the path of your output file"
 
 ###################################################################################################
 
