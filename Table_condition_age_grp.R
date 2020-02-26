@@ -23,7 +23,7 @@ age_groups <- list(c(0,18), c(18,40), c(40, 120))
 
 age_group_lbls <- c('Age_6', 'Age_4', 'Age_5' )
 
-filepath_out <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Output_data_ph2\\asthma_age_groups.txt"
+filepath_out <- "write the path of your output file"
 
 ############################## EXECUTE #############################################################
 
