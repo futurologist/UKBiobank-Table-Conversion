@@ -8,7 +8,7 @@ source("C:\\MY_FOLDERS\\Asthma_and_Pain\\R_code\\Table_creation\\Set_of_function
 
 #################  INPUTS FOR ADDITIONAL DATA, E.G. DEMOGRAPHIC INFO  ##############################
 
-pathfile_in <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Test_data\\ukb_demogr_geno_info.txt" 
+pathfile_in <- "write the path of your intput file"
 
 fields <- c('f.31.', 'f.21000.', 'f.21003.', 'f.22001.', 'f.22006.', 'f.22009.', 'f.22010.', 'f.22018.')    
 arrays_length <- c(1, 1, 1, 1, 1, 40, 1, 1)
@@ -22,7 +22,7 @@ labels <- c("Sex", "Ethnic_backgr",  "Age_at_Visit", "Genetic_sex",
 #instances   <-   c( 3, 1,  1)
 #labels <- c("Ethnic_backgr",  "Gen_ethnic_grp", "PC")
 
-filepath_out <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Output_data_ph2\\asth_rhin_ecz_demogr.txt"
+filepath_out <- "write the path of your output file"
 ####################################################################################################
 
 ############################## EXECUTE #############################################################
