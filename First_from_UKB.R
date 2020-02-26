@@ -25,8 +25,8 @@ list_of_codes <- c("f.6159.", "f.2956.", "f.3404.", "f.3414.", "f.3571.", "f.374
 #list_of_codes <- c("f.135.", "f.20002.", "f.20009.")
 #list_of_codes <- c("f.137.", "f.20003.")
 
-filepath_in <- "/mnt/nfs/backup/data/uk_biobank/ukb22741.r.tab" #string
-filepath_out <- "/home/ndimit2/Asthma_and_Pain/Output_data_ph1/ukb6159.txt"
+filepath_in <- "write the path of your input file" #string
+filepath_out <- "write the path of your output file"
 #########################################################################################################
 
 data_base <- fread(filepath_in)
