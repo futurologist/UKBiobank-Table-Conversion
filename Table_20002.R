@@ -1,13 +1,13 @@
 source("C:\\MY_FOLDERS\\Asthma_and_Pain\\R_code\\Table_creation\\Set_of_functions.R")
 
 ##############################  INPUT FOR CONDITIONS ###############################################
-filepath20002_in <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Output_data_ph1\\ukb20002.txt"
+filepath20002_in <- "write the path of your input file"
 
 list_of_conditions <- c(1111, 1387, 1452)
 
 list_of_labels <- c('Asthma', 'Hayf_Rhin', 'Eczema')
 
-filepath20002_out <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Output_data_ph2\\asth_rhin_ecz.txt" 
+filepath20002_out <- "write the path of your output file"
 ####################################################################################################
 
 
