@@ -2,7 +2,7 @@ source("C:\\MY_FOLDERS\\Asthma_and_Pain\\R_code\\Table_creation\\Set_of_function
 
 ############################## INPUTS FOR PAIN SITES ######################################################
 
-filepath6159_in <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Output_data_ph1\\ukb6159.txt"
+filepath6159_in <- "write the path of your input file"
 
 # you can change the lables that follow, but preservet their order: 
 list_of_labels <- c('Prf_no_Ansr', 'Non_Abve', 'All_over', 
@@ -16,7 +16,7 @@ labels <- c('All_over_3+m', 'Neck_Shldr_pn_3+m',
             'Hip_pn_3+m', 'Back_pn_3+m', 'Stom_Abdmn_pn_3+m', 
             'Knee_pn_3+m', 'Headch_3+m', 'Face_pn_3+m')
 
-filepath6159_out <- "C:\\MY_FOLDERS\\Asthma_and_Pain\\Output_data_ph2\\UKB_Pain_Duration.txt"
+filepath6159_out <- "write the path of your output file"
 ##########################################################################################################
 
 
@@ -52,8 +52,8 @@ t_pain_duration <- left_join(t_pain, t_pain_duration, by='f.eid')
 names(t_pain)[1] <- 'ID'
 names(t_pain_duration)[1] <- 'ID'
 
-#write.table(t_pain, "C:\\MY_FOLDERS\\Asthma_and_Pain\\Output_data_ph2\\ukb6159_Pain_01.txt", append = FALSE, sep = "\t", quote = FALSE, col.names=TRUE, row.names=FALSE)
-#write.table(t_duration, "C:\\MY_FOLDERS\\Asthma_and_Pain\\Output_data_ph2\\ukb6159_Duration.txt", append = FALSE, sep = "\t", quote = FALSE, col.names=TRUE, row.names=FALSE)
+#write.table(t_pain, "write the path of your output file", append = FALSE, sep = "\t", quote = FALSE, col.names=TRUE, row.names=FALSE)
+#write.table(t_duration, "write the path of your output file", append = FALSE, sep = "\t", quote = FALSE, col.names=TRUE, row.names=FALSE)
 write.table(t_pain_duration, 
             filepath6159_out,
             append = FALSE, sep = "\t", quote = FALSE, col.names=TRUE, row.names=FALSE)
