@@ -1,7 +1,6 @@
 library(dplyr)
 library(data.table)
 
-
 ####################################################################################
 chi_sq_table_inner <- function(T1, T2){
   unfold <- function(l){
@@ -33,6 +32,7 @@ chi_sq_table_inner <- function(T1, T2){
   }
   return(T_res)
 }
+
 
 chi_sq_table <- function(Tbl1, list1, Tbl2, list2){
   if (nrow(Tbl1) != nrow(Tbl2)){
@@ -80,3 +80,6 @@ list_2 <- c('Stom_Abdmn_pn_v1', 'Knee_pn_v1', 'Knee_pn_v2')
 ####################### EXECUTE: #####################################################
 
 T_chi_sq <- chi_sq_table(table_1, list_1, table_2, list_2)
+
+######################################################################################
+
