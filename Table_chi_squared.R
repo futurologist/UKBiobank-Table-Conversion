@@ -4,18 +4,21 @@ library(data.table)
 
 ####################################################################################
 chi_sq_table_inner <- function(T1, T2){
+  unfold <- function(l){
+    return(data.table(matrix(l, nrow = 1)))
+  }
   n1 <- length(T1[1,])
   n2 <- length(T2[1,])
   hT1 <- names(T1)
   hT2 <- names(T2)
-  k = 15
+  k = 19
   T_res <- bind_cols(data.table(matrix(rep("", len=n1*n2), nrow = n1*n2, ncol = 1)), 
                      data.table(matrix(rep(0, len=n1*n2*k), nrow = n1*n2, ncol = k)))
-  names(T_res) <- c('var1_Var2', 'chi_sq_stats', 'p.value', 
+  names(T_res) <- c('var1_Var2', 'chi_sq_stats', 'deg_of_frdm','p.value', 
                     'observed_No_and_No', 'observed_Yes_and_No', 'observed_No_and_Yes', 'observed_Yes_and_Yes',
                     'expected_No_and_No', 'expected_Yes_and_No', 'expected_No_and_Yes', 'expected_Yes_and_Yes',
                     'residuals_No_and_No', 'residuals_Yes_and_No', 'residuals_No_and_Yes', 'residuals_Yes_and_Yes',
-                    'stdres')
+                    'stdres_No_and_No', 'stdres_Yes_and_No', 'stdres_No_and_Yes', 'stdres_Yes_and_Yes')
   r <- 1
   for(i in 1:n1){
     C1 <- pull(T1, i)
@@ -23,11 +26,8 @@ chi_sq_table_inner <- function(T1, T2){
       C2 <- pull(T2, j)
       ch.sq.ts <- chisq.test(table(C1, C2))
       T_res[r, 1] <- paste(hT1[i], " and ", hT2[j], sep="") 
-      T_res[r, c(2,3)] <- ch.sq.ts[c(1,3)]
-      T_res[r, c(4:7)] <- data.table(matrix(ch.sq.ts[[6]], nrow = 1, ncol = 4))
-      T_res[r, c(8:11)] <- data.table(matrix(ch.sq.ts[[7]], nrow = 1, ncol = 4))
-      T_res[r, c(12:15)] <- data.table(matrix(ch.sq.ts[[8]], nrow = 1, ncol = 4))
-      T_res[r, 16] <-  ch.sq.ts[[9]][1]
+      T_res[r, c(2:4)] <- ch.sq.ts[c(1:3)]
+      T_res[r, c(5:20)] <- sapply(ch.sq.ts[c(6:9)], unfold)
       r <- r + 1
     }
   }
