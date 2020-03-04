@@ -11,9 +11,9 @@ chi_sq_table_inner <- function(T1, T2){
   hT1 <- names(T1)
   hT2 <- names(T2)
   k = 19
-  T_res <- bind_cols(data.table(matrix(rep("", len=n1*n2), nrow = n1*n2, ncol = 1)), 
+  T_res <- bind_cols(data.table(matrix(rep("", len=n1*n2), nrow = n1*n2, ncol = 2)), 
                      data.table(matrix(rep(0, len=n1*n2*k), nrow = n1*n2, ncol = k)))
-  names(T_res) <- c('var1_Var2', 'chi_sq_stats', 'deg_of_frdm','p.value', 
+  names(T_res) <- c('Var_1', 'Var_2', 'chi_sq_stats', 'deg_of_frdm','p_value', 
                     'observed_No_and_No', 'observed_Yes_and_No', 'observed_No_and_Yes', 'observed_Yes_and_Yes',
                     'expected_No_and_No', 'expected_Yes_and_No', 'expected_No_and_Yes', 'expected_Yes_and_Yes',
                     'residuals_No_and_No', 'residuals_Yes_and_No', 'residuals_No_and_Yes', 'residuals_Yes_and_Yes',
@@ -24,9 +24,9 @@ chi_sq_table_inner <- function(T1, T2){
     for(j in 1:n2){
       C2 <- pull(T2, j)
       ch.sq.ts <- chisq.test(table(C1, C2))
-      T_res[r, 1] <- paste(hT1[i], " and ", hT2[j], sep="") 
-      T_res[r, c(2:4)] <- ch.sq.ts[c(1:3)]
-      T_res[r, c(5:20)] <- sapply(ch.sq.ts[c(6:9)], unfold)
+      T_res[r, c(1,2)] <- list(hT1[i], hT2[j])
+      T_res[r, c(3:5)] <- ch.sq.ts[c(1:3)]
+      T_res[r, c(6:21)] <- sapply(ch.sq.ts[c(6:9)], unfold)
       r <- r + 1
     }
   }
