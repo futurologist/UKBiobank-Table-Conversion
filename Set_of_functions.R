@@ -105,7 +105,7 @@ build_cond_and_age_diag_table <- function(t_main, list_of_conditions, list_of_la
 
 ####################################################################################################
 
-relabel <- function(table, fields, array_length, instances, labels){
+relabel <- function(table, fields, arrays_length, instances, labels){
   headers <- names(table)
   #n_headers <- length(headers)
   n_fields <- length(fields)
