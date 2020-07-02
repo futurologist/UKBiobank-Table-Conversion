@@ -137,13 +137,13 @@ relabel <- function(table, fields, arrays_length, instances, labels){
   headers
 }
 
-group_by_visit <- function(t_cond, l_cond, n_vis){
+group_by_visit <- function(t_cond, l_cond, n_vis, age_onset){
   n_cond <- length(list_of_conditions)
   cl <- c(seq(1, n_vis*n_cond, by=n_vis)) + 1
-  cl <- c(cl, cl + n_vis*n_cond)
+  if(age_onset){cl <- c(cl, cl + n_vis*n_cond)}
   col <- c(1, cl)
   i <- 1
-  while(i < n_cond){
+  while(i < n_vis){
     col <- c(col, cl + i)
     i <- i + 1
   }
