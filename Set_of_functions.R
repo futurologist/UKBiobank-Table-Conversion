@@ -147,8 +147,7 @@ group_by_visit <- function(t_cond, l_cond, n_vis, age_onset){
     col <- c(col, cl + i)
     i <- i + 1
   }
-  #col <- c(1, col[seq(2,length(col), by=2)], col[seq(9,length(col), by=2)])
-  t <- select(t_cond, col)
+  t <- t_cond[ , ..col]
   return(t)
 }
 
@@ -159,8 +158,8 @@ group_cond_age <- function(t_cond, l_cond, n_vis){
   cc <- c(1:trs)
   ct[2*cc - 1] <- (cc + 1)
   ct[2*cc] <- (cc + trs + 1)
-  t <- t_cond
-  t <- select(t_cond, c(1, ct))
+  cc <- c(1, ct)
+  t <- t_cond[ , ..cc]
   return(t)
 }
 
