@@ -64,14 +64,14 @@ build_bin_20002 <- function(t_main, conds, cond_lbls, n_v, l_arry, start_pos){
 add_1_age_diag_to_table <- function(t_main, t_bin, cond, cond_lbl, n_v, l_arry, start_pos){
   find_indx_in_row <- function(r){
     j <- (match(cond, r[a:b]) + a-1 + 3*l_arry)
-    r[j]
+    return(r[j])
   }
   cond_found_in_row <- function(r){any(r == cond)}
   t_out <- t_bin
   for(i in 1:n_v){
     a <- start_pos + (i-1)*l_arry
     b <- a + l_arry - 1 
-    t_filtered <- filter(t_main, apply(t_main[,a:b], 1, cond_found_in_row))
+    t_filtered <- filter(t_main, apply(t_main, 1, cond_found_in_row))
     t_age <-  select(t_filtered, 'f.eid')
     t_age <- mutate(t_age,  as.character(i))
     t_age[,2] <- apply(t_filtered, 1, find_indx_in_row)
