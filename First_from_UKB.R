@@ -10,7 +10,7 @@ extract_UKB_subtable <- function(data_base, list_of_codes){
     pos <- c(pos, grep(code, headers))
   } 
   subt <- data_base[, ..pos]
-  subt <- subt[order(subt[,'f.eid']), ]
+  subt <- subt[order(subt[, 1]), ]
   subt
 }
 
