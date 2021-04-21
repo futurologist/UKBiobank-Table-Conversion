@@ -28,7 +28,7 @@ t20002_bin <- build_cond_and_age_diag_table(t20002,
                                             start_pos)
 names(t20002_bin)[1] <- 'ID'
 
-t20002_bin_reord <- group_by_visit(t20002_bin, list_of_conditions, n_visits)
+t20002_bin_reord <- group_by_visit(t20002_bin, list_of_conditions, n_visits, age_onset=TRUE)
 
 t20002_cond_age <- group_cond_age(t20002_bin, list_of_conditions, n_visits)
 
