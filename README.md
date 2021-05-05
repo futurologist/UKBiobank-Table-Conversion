@@ -23,13 +23,13 @@ The R code provided performs this conversion.
 
 How to Use:
 -----------------------------------------------------------------------------------------------
-Step 1: Use script "First_from_UKB.R" to extract a raw subtable from the big raw UKB data file;
+Step 1: Use script "First_from_UKB.R" to extract a raw subtable from the big raw UKB data file; For the field 20002 one needs to include also the field 135 and possibly 20009.
 
 The scripts discussed below, import and use the file of R functions "Set\_of\_functions.R". Make sure to download this file.
 
 Step 2: After the raw subtatble is being extracted:
-   2.1. For field 20002 and related: Use "Table_20002.R"
-   2.2. For field 6159 and related: Use "Table_6159.R"
+   2.1. For field 20002 and related (fields 135 (mandatory) and 20009): Use "Table_20002.R"
+   2.2. For field 6159 and related (duration of pain fileds): Use "Table_6159.R"
    2.3. For fields of demographic data (e.g. Age, Gender, Principal Components, etc): Use "Table_demogr_data.R"
 
 Step 3: Further conversions:
